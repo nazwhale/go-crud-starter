@@ -5,6 +5,6 @@ import (
 	"net/http"
 )
 
-func HandleRoot(writer http.ResponseWriter, request *http.Request) {
-	_, _ = fmt.Fprintf(writer, "👋")
+func HandleRoot(w http.ResponseWriter, r *http.Request) {
+	_, _ = fmt.Fprintf(w, "👋")
 }

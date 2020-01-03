@@ -8,12 +8,12 @@ import (
 	"github.com/personal-projects/go-crud-starter/src/dao"
 )
 
-func HandleListWorks(writer http.ResponseWriter, request *http.Request) {
+func HandleListWorks(w http.ResponseWriter, r *http.Request) {
 	works, err := dao.ListWorks(10)
 
 	if err != nil {
 		log.Fatal("Error listing works", err)
 	}
 
-	json.NewEncoder(writer).Encode(works)
+	json.NewEncoder(w).Encode(works)
 }

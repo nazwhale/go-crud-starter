@@ -9,8 +9,8 @@ import (
 	"strconv"
 )
 
-func HandleGetWorkByID(writer http.ResponseWriter, request *http.Request) {
-	vars := mux.Vars(request)
+func HandleGetWorkByID(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
 	workID, err := strconv.Atoi(vars["id"])
 	if err != nil {
 		log.Fatal("Error parsing id key as int", err)
@@ -21,5 +21,5 @@ func HandleGetWorkByID(writer http.ResponseWriter, request *http.Request) {
 		log.Fatal("Error listing works", err)
 	}
 
-	json.NewEncoder(writer).Encode(work)
+	json.NewEncoder(w).Encode(work)
 }
