@@ -18,7 +18,7 @@ func HandleGetWorkByID(w http.ResponseWriter, r *http.Request) {
 
 	work, err := dao.ReadWork(workID)
 	if err != nil {
-		log.Fatal("Error listing works", err)
+		log.Fatal("Error reading work", err)
 	}
 
 	json.NewEncoder(w).Encode(work)

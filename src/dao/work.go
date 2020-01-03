@@ -115,23 +115,32 @@ WHERE id = $1;`
 
 // Update
 
-func updateWork(db *sql.DB, name, imageURL string, artistID int) {
+func UpdateWork(id, artistID int, name, imageURL string) (Work, error) {
+	connectionURL := os.Getenv("DATABASE_URL")
+
+	db, err := sql.Open("postgres", connectionURL)
+	if err != nil {
+		return Work{}, err
+	}
+	defer db.Close()
+
+	return updateWork(db, id, artistID, name, imageURL), nil
+}
+
+func updateWork(db *sql.DB, id, artistID int, name, imageURL string) Work {
 	sqlStatement := `
 UPDATE works
-SET name = $2, area = $3
-WHERE id = $1;`
+SET name = $2, image_url = $3, artist_id = $4
+WHERE id = $1
+RETURNING *;`
 
-	rsp, err := db.Exec(sqlStatement, 1, name, imageURL, artistID)
+	var work Work
+	err := db.QueryRow(sqlStatement, id, name, imageURL, artistID).Scan(&work.ID, &work.ImageURL, &work.Name, &work.ArtistID)
 	if err != nil {
 		panic(err)
 	}
 
-	count, err := rsp.RowsAffected()
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("rows affected: ", count)
+	return work
 }
 
 // Delete
@@ -153,4 +162,3 @@ WHERE id = $1;`
 
 	fmt.Println("rows affected: ", count)
 }
-
