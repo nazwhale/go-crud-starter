@@ -21,7 +21,7 @@ func handleRequests() {
 	router.HandleFunc("/", handler.HandleRoot)
 	router.HandleFunc("/works/list", handler.HandleListWorks)
 	router.HandleFunc("/work/create", handler.HandleCreateWork).Methods("POST")
-	router.HandleFunc("/work/{id}", handler.HandleGetWork)
+	router.HandleFunc("/work/{id}", handler.HandleGetWorkByID)
 
 	err := http.ListenAndServe(getPort(), router)
 	if err != nil {

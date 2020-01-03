@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func HandleGetWork(writer http.ResponseWriter, request *http.Request) {
+func HandleGetWorkByID(writer http.ResponseWriter, request *http.Request) {
 	vars := mux.Vars(request)
 	workID, err := strconv.Atoi(vars["id"])
 	if err != nil {
