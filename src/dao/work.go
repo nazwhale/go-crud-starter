@@ -81,7 +81,10 @@ LIMIT $1;`
 
 // Read
 
+// consider returning a dao object with these CRUD methods on it
 func ReadWork(workID int) (Work, error) {
+
+	// consider popping this in main()
 	connectionURL := os.Getenv("DATABASE_URL")
 
 	db, err := sql.Open("postgres", connectionURL)

@@ -9,6 +9,9 @@ import (
 	"strings"
 )
 
+// consider wrapping handlers in a middleware to do any of this stuff
+// consider returning specific errors lower down, then switching on them and returning relevant http status codes
+
 func HandleCreateWork(w http.ResponseWriter, r *http.Request) {
 	// Use http.MaxBytesReader to enforce a maximum read of 1MB from the
 	// response body. A r body larger than that will now result in
